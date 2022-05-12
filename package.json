@@ -2,11 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
-    "serve": "node data_import.js && node main.js",
-    "build": "node main.js"
+    "serve": "nodemon data_imports.js",
+    "build": "node data_imports.js",
+    "start": "node main.js"
   },
   "keywords": [],
   "author": "",
