@@ -1,8 +1,11 @@
 // Load packages
 import ARIMA from "arima";
 import fs from "fs";
+import something from "./data_import.js";
 
-//parsing the saved data from the file
+const [writeFile, data] = something;
+
+// parsing the saved data from the file
 const rawData = fs.readFileSync("./data.json");
 let dataSol = JSON.parse(rawData);
 dataSol = dataSol[0].data;
@@ -41,6 +44,11 @@ const arima = new ARIMA({
 
 // result of prediction for 6 days
 const [pred, errors] = arima.predict(6);
+let predResults = [];
 pred.forEach((item, index) => {
-  console.log(`${index + 1} day prediction is ${Math.floor(item)}`);
+  predResults.push({
+    pred: `${index + 1} day prediction is ${Math.floor(item)}`,
+  });
 });
+
+writeFile(predResults, "prediction.json");

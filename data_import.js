@@ -7,14 +7,6 @@ const url =
   "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.json";
 let data_info = [];
 
-//timer
-// changes from 12hr to 24hr
-const deadline = 43200000;
-const myTimer = setInterval(() => {
-  console.log("we will fetch data in every 12 hours");
-  data();
-}, deadline);
-
 //recieveing and packing data
 const data = () => {
   return Axios.get(url)
@@ -23,7 +15,7 @@ const data = () => {
         data.data.forEach((data) => {
           if (data.country === "India") {
             data_info = [data];
-            writeFile();
+            writeFile(data_info, "data.json");
           }
         });
       } else {
@@ -36,16 +28,18 @@ const data = () => {
 };
 
 // writing data to file
-function writeFile() {
-  const jsonify = JSON.stringify(data_info);
+function writeFile(data, fileName) {
+  const jsonify = JSON.stringify(data);
   try {
-    fs.writeFileSync("data.json", jsonify, (err) => {
+    fs.writeFile(fileName, jsonify, (data) => {
       console.log("The file has been created successfully");
     });
   } catch (err) {
     console.error(err);
   }
 }
+
+export default [writeFile, data];
 
 // // Load packages
 // const CsvReadableStream = require("csv-reader");
