@@ -7,7 +7,7 @@
   "scripts": {
     "serve": "nodemon data_imports.js",
     "build": "node data_imports.js",
-    "start": "node main.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

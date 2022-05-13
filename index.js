@@ -32,7 +32,9 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  timedData();
+  setInterval(() => {
+    timedData();
+  }, 18000000);
 });
 
 // check the time at maybe 5pm or 6pm
