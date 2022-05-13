@@ -5,9 +5,8 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "serve": "nodemon data_imports.js",
-    "build": "node data_imports.js",
-    "start": "nodemon index.js"
+    "build": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
