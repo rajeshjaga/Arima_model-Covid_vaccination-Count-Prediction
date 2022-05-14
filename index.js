@@ -4,23 +4,25 @@ import something from "./data_import.js";
 import fs from "fs";
 
 const app = Express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const [writeFile, data] = something;
 
 app.use(cors());
 
 // 24hrs in milliseconds
 const timeInt = 20;
+const min = 60 * 1000;
+const hour = 60 * min;
 
 // timed json dataset collection
-const timedData = () => {
+const timedData = setInterval(() => {
   const newDate = new Date().getHours();
   if (newDate === timeInt) {
     data();
   } else {
     console.log("wait for the cycle");
   }
-};
+}, hour);
 
 //default endpoint give the predicted data
 
@@ -32,9 +34,6 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  setInterval(() => {
-    timedData();
-  }, 18000000);
 });
 
 // check the time at maybe 5pm or 6pm
