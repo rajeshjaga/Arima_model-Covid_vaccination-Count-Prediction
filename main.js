@@ -57,15 +57,18 @@ const model = (cleanedData) => {
 let predResults = [];
 let rawResults = [];
 
-const results = (cleaned) => {
+const results = (cleaned, name) => {
   const [pred, err] = model(cleaned);
   pred.forEach((item, index) => {
+    if (index === 0) {
+      predResults.push(name);
+    }
     predResults.push({
       pred: `${index + 1} day prediction is ${Math.floor(item)}`,
     });
 
     rawResults.push({
-      item: `${item}`,
+      item: `${Math.floor(item)}`,
       error: `${err[index]}`,
     });
   });
@@ -76,11 +79,10 @@ const main = () => {
   deNullify(totvacc, totvacclean);
   deNullify(peovacc, peovacclean);
   // result of prediction
-  results(totvacclean);
-  results(peovacclean);
+  results(totvacclean, "total_vaccinations");
+  results(peovacclean, "people_vaccinated");
   //writing data to the file
   writeFile(predResults, "prediction.json");
   writeFile(rawResults, "rawdata.json");
 };
-
 export default main;

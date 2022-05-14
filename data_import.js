@@ -40,7 +40,7 @@ function writeFile(data, fileName) {
     console.error(err);
   }
 }
-
+data();
 export default [writeFile, data];
 
 // // Load packages
