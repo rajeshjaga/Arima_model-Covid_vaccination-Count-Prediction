@@ -83,4 +83,4 @@ const main = () => {
   writeFile(rawResults, "rawdata.json");
 };
 
-main();
+export default main;
