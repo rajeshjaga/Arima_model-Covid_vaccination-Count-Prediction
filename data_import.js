@@ -5,9 +5,11 @@ import fs from "fs";
 // URL for dataset
 const url =
   "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.json";
+
+//array to store the data
 let data_info = [];
 
-//recieveing and packing data
+//receiving and packing data
 const data = () => {
   return Axios.get(url)
     .then((data) => {
