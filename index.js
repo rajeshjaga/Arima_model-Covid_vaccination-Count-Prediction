@@ -1,12 +1,15 @@
+// importing libraries
 import Express from "express";
 import cors from "cors";
 import something from "./data_import.js";
 import fs from "fs";
 
+// default stuff
 const app = Express();
 const port = process.env.PORT || 5000;
 const [writeFile, data] = something;
 
+// for cross site scripting errors
 app.use(cors());
 
 // 24hrs in milliseconds
@@ -25,29 +28,27 @@ const timedData = setInterval(() => {
 }, hour);
 
 //default endpoint give the predicted data
-
 app.get("/", (req, res) => {
   const rawData = fs.readFileSync("./prediction.json");
   let predData = JSON.parse(rawData);
   res.send(predData);
 });
+
+// endpoint to get the ml's raw data
 app.get("/rawdata", (req, res) => {
   const rawData = fs.readFileSync("./rawdata.json");
   let predData = JSON.parse(rawData);
   res.send(predData);
 });
-app.get("/def", (req, res) => {
+
+// endpoint to get the actual default from the file
+app.get("/default", (req, res) => {
   const rawData = fs.readFileSync("./data.json");
   let predData = JSON.parse(rawData);
   res.send(predData);
 });
 
+//default port listen
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-// check the time at maybe 5pm or 6pm
-// if it is 5pm or 6pm, fetch the api to the generate dataset
-// because the data has to  predicted and take a while to generate
-// we store the predicted value in another json and make an api endpoint
-// to serve just the predicte values
