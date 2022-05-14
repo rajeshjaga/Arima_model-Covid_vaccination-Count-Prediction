@@ -31,6 +31,16 @@ app.get("/", (req, res) => {
   let predData = JSON.parse(rawData);
   res.send(predData);
 });
+app.get("/rawdata", (req, res) => {
+  const rawData = fs.readFileSync("./rawdata.json");
+  let predData = JSON.parse(rawData);
+  res.send(predData);
+});
+app.get("/def", (req, res) => {
+  const rawData = fs.readFileSync("./data.json");
+  let predData = JSON.parse(rawData);
+  res.send(predData);
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
