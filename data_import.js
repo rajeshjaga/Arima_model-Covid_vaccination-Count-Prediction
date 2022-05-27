@@ -14,6 +14,7 @@ const data = () => {
   return Axios.get(url)
     .then((data) => {
       if (data !== undefined || data !== null) {
+        writeFile(data, "./rawdata.json");
         data.data.forEach((data) => {
           if (data.country === "India") {
             data_info = [data];

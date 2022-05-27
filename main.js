@@ -72,10 +72,6 @@ const main = () => {
   // data cleaning
   deNullify(totvacc, totvacclean);
   deNullify(peovacc, peovacclean);
-  // result of prediction
-  // console.log(results(totvacclean, Results));
-  // console.log(results(peovacclean, peoResults));
-  //writing data to the file
   // writing ony vaccintaion count predictions
   writeFile(results(totvacclean, Results), "vaccPrediction.json");
   // writing only people vaccinated count prediction

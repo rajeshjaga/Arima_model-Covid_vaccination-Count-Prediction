@@ -1,17 +1,19 @@
 // importing libraries
-import Express from "express";
-import cors from "cors";
 import fs from "fs";
-import something from "./data_import.js";
+import path from "path";
+import cors from "cors";
+import Express from "express";
 import main from "./main.js";
 import dayAdder from "./day.js";
-import path from "path";
+import infodata from "./hero.js";
+import something from "./data_import.js";
 
 // default stuff
 const app = Express();
 const port = process.env.PORT || 5000;
 const [writeFile, data] = something;
 const __dirname = path.dirname("./");
+
 // for cross site scripting errors
 app.use(cors());
 
@@ -27,6 +29,7 @@ const timedData = setInterval(() => {
     data();
     dayAdder();
     main();
+    infodata();
   } else {
     console.log("wait for the cycle");
   }
@@ -78,4 +81,11 @@ app.get("/default", (req, res) => {
 //default port listen
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+// endpoint to get the actual default from the file (unmoded)
+app.get("/cantgetNow", (req, res) => {
+  const rawData = fs.readFileSync("./hero.json");
+  let predData = JSON.parse(rawData);
+  res.send(predData);
 });

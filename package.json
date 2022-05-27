@@ -13,6 +13,7 @@
   "dependencies": {
     "arima": "^0.2.5",
     "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.11",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "pug": "^3.0.2",
