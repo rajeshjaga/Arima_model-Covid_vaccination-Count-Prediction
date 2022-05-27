@@ -40,27 +40,4 @@ function writeFile(data, fileName) {
     console.error(err);
   }
 }
-data();
 export default [writeFile, data];
-
-// // Load packages
-// const CsvReadableStream = require("csv-reader");
-// const fs = require("fs");
-
-// // Reading csv file
-// const csv_file = fs.createReadStream("Cleaned_Data_India.csv", "utf8");
-// let data_acc = csv_file
-//   .pipe(
-//     new CsvReadableStream({
-//       parseNumbers: true,
-//       parseBooleans: true,
-//       trim: true,
-//     })
-//   )
-//   .on("data", (row) => {
-//     console.log(row);
-//   })
-//   .on("end", () => {
-//     console.log("end");
-//   });
-// export default data_acc;
