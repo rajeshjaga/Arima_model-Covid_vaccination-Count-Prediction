@@ -48,7 +48,7 @@ const model = (cleanedData) => {
     q: 1,
     verbose: true,
   }).train(cleanedData);
-  // result of prediction for 6 days
+  // result of prediction for 10 weeks
   const [pred, errors] = arima.predict(70);
   return [pred, errors];
 };
@@ -73,8 +73,9 @@ const main = () => {
   deNullify(totvacc, totvacclean);
   deNullify(peovacc, peovacclean);
   // writing ony vaccintaion count predictions
-  writeFile(results(totvacclean, Results), "vaccPrediction.json");
   // writing only people vaccinated count prediction
   writeFile(results(peovacclean, peoResults), "peoplePerdiction.json");
+  writeFile(results(totvacclean, Results), "vaccPrediction.json");
 };
+main();
 export default main;

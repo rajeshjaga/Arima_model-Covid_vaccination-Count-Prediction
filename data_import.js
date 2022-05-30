@@ -1,11 +1,9 @@
 //importing libraries
 import Axios from "axios";
 import fs from "fs";
-
 // URL for dataset
 const url =
   "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.json";
-
 //array to store the data
 let data_info = [];
 
@@ -14,7 +12,6 @@ const data = () => {
   return Axios.get(url)
     .then((data) => {
       if (data !== undefined || data !== null) {
-        writeFile(data, "./rawdata.json");
         data.data.forEach((data) => {
           if (data.country === "India") {
             data_info = [data];
