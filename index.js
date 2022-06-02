@@ -28,8 +28,8 @@ const timedData = setInterval(() => {
   if (newDate === timeInt) {
     data();
     dayAdder();
-    main();
     infodata();
+    main();
   } else {
     console.log("wait for the cycle");
   }

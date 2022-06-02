@@ -30,12 +30,9 @@ const data = () => {
 // writing data to file
 function writeFile(data, fileName) {
   const jsonify = JSON.stringify(data);
-  try {
-    fs.writeFile(fileName, jsonify, (data) => {
-      console.log("The file has been created successfully");
-    });
-  } catch (err) {
-    console.error(err);
-  }
+  fs.writeFile(fileName, jsonify, (data) => {
+    console.log("The file has been created successfully");
+  });
 }
+
 export default [writeFile, data];

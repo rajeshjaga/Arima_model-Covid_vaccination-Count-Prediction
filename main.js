@@ -1,8 +1,9 @@
 // importing packages
 import ARIMA from "arima";
 import fs from "fs";
+import { setTimeout } from "timers/promises";
 import something from "./data_import.js";
-import getWeekDay from "./example.js";
+import recuFunc from "./example.js";
 // getting few functions from otherfile for writing data
 const [writeFile] = something;
 
@@ -53,7 +54,7 @@ const model = (cleanedData) => {
   return [pred, errors];
 };
 
-let Results = [];
+let vaccResults = [];
 let peoResults = [];
 
 const results = (cleaned, result) => {
@@ -64,8 +65,6 @@ const results = (cleaned, result) => {
       error: `${Math.floor(err[index])}`,
     });
   });
-  // adding consecutive days to the data
-  return getWeekDay(day[day.length - 1], result);
 };
 
 const main = () => {
@@ -73,9 +72,9 @@ const main = () => {
   deNullify(totvacc, totvacclean);
   deNullify(peovacc, peovacclean);
   // writing ony vaccintaion count predictions
-  // writing only people vaccinated count prediction
-  writeFile(results(peovacclean, peoResults), "peoplePerdiction.json");
-  writeFile(results(totvacclean, Results), "vaccPrediction.json");
+  results(totvacclean, vaccResults);
+  vaccResults = recuFunc(day[day.length - 1], vaccResults);
+  writeFile(vaccResults, "vaccinationPrediction.json");
+  writeFile(peoResults, "peoplePrediction.json");
 };
-main();
 export default main;

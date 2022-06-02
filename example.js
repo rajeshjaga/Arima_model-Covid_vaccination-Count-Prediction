@@ -21,4 +21,5 @@ const recuFunc = (dateDay, info) => {
   });
   return mergerData;
 };
+
 export default recuFunc;
