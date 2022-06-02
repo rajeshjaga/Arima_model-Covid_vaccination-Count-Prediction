@@ -4,9 +4,9 @@ import path from "path";
 import cors from "cors";
 import Express from "express";
 import main from "./main.js";
-import dayAdder from "./day.js";
 import infodata from "./hero.js";
 import something from "./data_import.js";
+import dayAdder from "./day.js";
 
 // default stuff
 const app = Express();
@@ -26,10 +26,21 @@ const hour = 60 * min;
 const timedData = setInterval(() => {
   const newDate = new Date().getHours();
   if (newDate === timeInt) {
-    data();
-    dayAdder();
-    infodata();
-    main();
+    const somePromises = new Promise((resolve, reject) => {
+      data();
+    })
+      .then(() => {
+        dayAdder();
+      })
+      .then(() => {
+        infodata();
+      })
+      .then(() => {
+        main();
+      })
+      .catch(() => {
+        app.post("internal server error please report ");
+      });
   } else {
     console.log("wait for the cycle");
   }
@@ -53,14 +64,14 @@ app.get("/rawdata", (req, res) => {
 
 // endpoint to get the ml's raw data
 app.get("/vaccination_prediction", (req, res) => {
-  const rawData = fs.readFileSync("./vaccPrediction.json");
+  const rawData = fs.readFileSync("./vaccinationPrediction.json");
   let predData = JSON.parse(rawData);
   res.send(predData);
 });
 
 // endpoint to get the ml's raw data
 app.get("/people_prediction", (req, res) => {
-  const rawData = fs.readFileSync("./peopleperdiction.json");
+  const rawData = fs.readFileSync("./peoplePrediction.json");
   let predData = JSON.parse(rawData);
   res.send(predData);
 });

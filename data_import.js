@@ -1,6 +1,7 @@
 //importing libraries
 import Axios from "axios";
 import fs from "fs";
+
 // URL for dataset
 const url =
   "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.json";
@@ -31,7 +32,7 @@ const data = () => {
 function writeFile(data, fileName) {
   const jsonify = JSON.stringify(data);
   fs.writeFile(fileName, jsonify, (data) => {
-    console.log("The file has been created successfully");
+    console.log("The file has been created successfully", fileName);
   });
 }
 

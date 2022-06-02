@@ -1,13 +1,13 @@
 //importing libaries
 import fs from "fs";
 import something from "./data_import.js";
-const [writeFile] = something;
 
 // parsing the saved data from the file
 const rawData = fs.readFileSync("./data.json");
 let dataSol = JSON.parse(rawData);
 dataSol = dataSol[0].data;
 
+const [writeFile] = something;
 // array to store the data
 let raw = [];
 
@@ -26,5 +26,4 @@ const dayAdder = () => {
   weekData(dataSol);
   writeFile(raw, "./data_mod.json");
 };
-dayAdder();
 export default dayAdder;

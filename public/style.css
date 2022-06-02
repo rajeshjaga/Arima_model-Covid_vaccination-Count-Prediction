@@ -36,6 +36,7 @@ a {
 .NavButtons {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   padding: 2rem 0rem;
   width: 100%;

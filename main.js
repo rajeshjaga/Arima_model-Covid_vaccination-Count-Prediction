@@ -1,7 +1,6 @@
 // importing packages
 import ARIMA from "arima";
 import fs from "fs";
-import { setTimeout } from "timers/promises";
 import something from "./data_import.js";
 import recuFunc from "./example.js";
 // getting few functions from otherfile for writing data
@@ -65,6 +64,7 @@ const results = (cleaned, result) => {
       error: `${Math.floor(err[index])}`,
     });
   });
+  recuFunc(day[day.length - 1], result);
 };
 
 const main = () => {
@@ -73,7 +73,6 @@ const main = () => {
   deNullify(peovacc, peovacclean);
   // writing ony vaccintaion count predictions
   results(totvacclean, vaccResults);
-  vaccResults = recuFunc(day[day.length - 1], vaccResults);
   writeFile(vaccResults, "vaccinationPrediction.json");
   writeFile(peoResults, "peoplePrediction.json");
 };
