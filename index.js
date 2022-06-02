@@ -26,25 +26,14 @@ const hour = 60 * min;
 const timedData = setInterval(() => {
   const newDate = new Date().getHours();
   if (newDate === timeInt) {
-    const somePromises = new Promise((resolve, reject) => {
-      data();
-    })
-      .then(() => {
-        dayAdder();
-      })
-      .then(() => {
-        infodata();
-      })
-      .then(() => {
-        main();
-      })
-      .catch(() => {
-        app.post("internal server error please report ");
-      });
+    data();
+    dayAdder();
+    infodata();
+    main();
   } else {
     console.log("wait for the cycle");
   }
-}, hour);
+}, min);
 
 // by default use pug engine to view an default page
 app.set("views", path.join(__dirname, "views"));

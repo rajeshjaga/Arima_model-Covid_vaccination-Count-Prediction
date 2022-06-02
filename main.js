@@ -55,6 +55,8 @@ const model = (cleanedData) => {
 
 let vaccResults = [];
 let peoResults = [];
+let peoResultsFinal = [];
+let vaccResultsFinal = [];
 
 const results = (cleaned, result) => {
   const [pred, err] = model(cleaned);
@@ -64,16 +66,17 @@ const results = (cleaned, result) => {
       error: `${Math.floor(err[index])}`,
     });
   });
-  recuFunc(day[day.length - 1], result);
 };
 
 const main = () => {
   // data cleaning
   deNullify(totvacc, totvacclean);
   deNullify(peovacc, peovacclean);
-  // writing ony vaccintaion count predictions
+  // writing ony vaccination count predictions
   results(totvacclean, vaccResults);
-  writeFile(vaccResults, "vaccinationPrediction.json");
+  results(peovacclean, peoResults);
+  vaccResultsFinal = recuFunc(day[day.length - 1], vaccResults);
+  writeFile(vaccResultsFinal, "vaccinationPrediction.json");
   writeFile(peoResults, "peoplePrediction.json");
 };
 export default main;
