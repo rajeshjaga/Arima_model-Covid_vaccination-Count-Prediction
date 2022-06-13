@@ -3,10 +3,10 @@ import fs from "fs";
 import path from "path";
 import cors from "cors";
 import Express from "express";
-import main from "./main.js";
-import infodata from "./hero.js";
 import something from "./data_import.js";
 import dayAdder from "./day.js";
+import infodata from "./hero.js";
+import main from "./main.js";
 
 // default stuff
 const app = Express();
@@ -26,14 +26,24 @@ const hour = 60 * min;
 const timedData = setInterval(() => {
   const newDate = new Date().getHours();
   if (newDate === timeInt) {
-    data();
-    dayAdder();
-    infodata();
-    main();
+    let step = new Promise((res) => {
+      data();
+      res("data written sucessfully");
+    });
+    step
+      .then(() => {
+        main();
+        infodata();
+      })
+      .catch((err) => {
+        fs.writeFileSync();
+        console.log("error");
+      });
   } else {
     console.log("wait for the cycle");
   }
-}, min);
+  dayAdder();
+}, hour);
 
 // by default use pug engine to view an default page
 app.set("views", path.join(__dirname, "views"));

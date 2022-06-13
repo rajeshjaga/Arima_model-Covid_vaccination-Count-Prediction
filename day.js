@@ -24,6 +24,6 @@ const weekData = (data) => {
 // writes a file with the data moded
 const dayAdder = () => {
   weekData(dataSol);
-  writeFile(raw, "./data_mod.json");
+  writeFile(raw, "data_mod.json");
 };
 export default dayAdder;
