@@ -1,15 +1,15 @@
 import Axios from "axios";
 import writeFile from "./file.js";
-import { uri } from "./config.js";
+import { uri, basefile, coutryfile } from "./config.js";
 
 const mainData = () => {
   Axios.get(uri).then((res) => {
-    writeFile(res.data, "data.json");
+    writeFile(res.data, basefile);
     res.data.map((item) => {
       if (item.country === "India") {
-        writeFile(res.data, "data_india.json");
+        writeFile(item, coutryfile);
       }
     });
   });
 };
-mainData();
+export default mainData;
